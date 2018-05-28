@@ -1,8 +1,7 @@
 <?php 
 	session_start();
-	if ( !isset($_SESSION['email']) ){
-		header( "Location: ../index.php" );
-	}
+	if(!empty($_SESSION['permessi'])){
+      	if (strpos($_SESSION['permessi'], "LOG") !== false) { 
 	$nome_file = "../server/logs/log_home.txt";
 	if (file_exists($nome_file)){
 		date_default_timezone_set('CET');
@@ -19,17 +18,17 @@
 	<link rel="stylesheet" type="text/css" href="../lib/materialize/materialize.min.css">
 </head>
 <body>
-	<nav>
-		<div class="nav-wrapper">
-		  	<a href="#" class="brand-logo">Prova LOGIN</a>
-		  	<ul id="nav-mobile" class="right hide-on-med-and-down">
-		    	<li><a>Ludovico Venturi</a></li>
-		    	<li><a>Stefano Santafè</a></li>
-		  	</ul>
-		</div>
-	</nav>
+	<?php require("../server/nav.php"); ?>
 	<div class="container">
-		<h4>LOGs</h4>
+		<div class="row">
+			<div class="col s6">
+				<h4>LOGs</h4>
+			</div>
+			<div class="col s3 offset-s1"><br>
+				<a href="home.php" class="waves-effect waves-light btn">HOME</a>
+				<p>Torna alla Home</p>
+			</div>
+		</div>
 		<?php 
 			while(! feof($idfile))
 			{
@@ -43,6 +42,9 @@
 </body>
 </html>
 <?php 
-	fwrite($idfile, '['.date("Y-m-d, H.i.s_e").'] = '. "log letto da '" . $_SESSION['email'] . "'" . PHP_EOL );
 	fclose($idfile);
+?>
+<?php   
+		} else { header( "Location: ../index.php" ); }
+	} else { header( "Location: ../index.php" ); }
 ?>

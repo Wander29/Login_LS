@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+	session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +22,9 @@
 		<h4>Accesso all'area riservata</h4>
 	<form action="server/_login.php" method="post">
 		<p>
-			email: <input type="text" name="email" size="40" required/>
-			password: <input type="password" name="psw" size="40" required/><br/>
+			<b>Email</b> <input type="text" name="email" size="40" required/>
+			<br><br>
+			<b>Password</b> <input type="password" name="psw" size="40" required/><br/><br>
 		</p>
 		<p>
 			<input type="submit" name="invio" value="Login" />

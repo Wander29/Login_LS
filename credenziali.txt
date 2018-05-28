@@ -1,0 +1,5 @@
+ADMIN:
+stefano@admin	admin
+
+UTENTE:
+ludo@mail	ludo
