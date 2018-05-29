@@ -7,7 +7,6 @@
 		date_default_timezone_set('CET');
 		$idfile = fopen($nome_file, 'a+');
 		if (!$idfile) die ('File non aperto');
-
 		//$log = file_get_contents($nome_file);
 	}	
 ?>

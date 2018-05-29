@@ -21,10 +21,23 @@
 				if (!$idfile) die ('File non aperto');
 			}
 			//scrittura LOG
+			$appo;
+			$countline = 0;
+			$maxRowsLog = 8;
 			while(!feof($idfile))
 			{
-				$line = fgets($idfile); //necessario per continuare a leggere nel file, riga per riga in modo da raggiungere la fine
+				$line = fgets($idfile); 
+				$appo[$countline] = $line;
+				$countline ++;
 			}
+
+			if ( ($countline-1) == $maxRowsLog ){
+				file_put_contents($nome_file, $appo[1]);
+				for ($i = 2; $i <= $maxRowsLog; $i++){
+					fwrite($idfile, $appo[$i]);
+				}
+			}
+
 			fwrite($idfile, '['.date("Y-m-d, H.i.s_e").'] = '. "Accesso effettuato da '" . $_SESSION['email'] . "'" . " --> IP: [" . $_SERVER['REMOTE_ADDR'] . "]" .PHP_EOL );
 
 			fclose($idfile);	
